@@ -6,7 +6,7 @@ const showMobileNav = ref( false );
 
 <template>
   <nav class="navbar is-success" role="navigation" aria-label="main navigation">
-    <div class="container is-max-desktop">
+    <div class="container is-max-desktop px-2">
       <div class="navbar-brand">
         <div class="navbar-item is-size-4 is-family-monospace" href="https://bulma.io">
           Noteballs
