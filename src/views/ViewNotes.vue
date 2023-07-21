@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue";
+import Note from "@/components/Notes/Note.vue";
 
 const newNote = ref( '' );
 
-const newNoteRef = ref(null);
+const newNoteRef = ref( null );
 
 const notes = ref( [
   {
@@ -23,7 +24,7 @@ const addNote = () => {
     id,
     content: newNote.value
   }
-  notes.value.unshift(note);
+  notes.value.unshift( note );
   newNote.value = '';
   newNoteRef.value.focus();
 }
@@ -38,7 +39,8 @@ const addNote = () => {
               ref="newNoteRef"
               v-model="newNote"
               class="textarea"
-              placeholder="Add a new note"></textarea>
+              placeholder="Add a new note"
+          ></textarea>
         </div>
       </div>
 
@@ -52,15 +54,12 @@ const addNote = () => {
         </div>
       </div>
     </div>
-    <div class="card mb-4" :key="note.id" v-for="note in notes">
-      <div class="card-content">
-        <div class="content">{{ note.content }}</div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+
+    <Note
+        :note="note"
+        :key="note.id"
+        v-for="note in notes"
+    />
   </div>
 </template>
 
