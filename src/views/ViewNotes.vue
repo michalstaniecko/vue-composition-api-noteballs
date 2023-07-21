@@ -1,36 +1,22 @@
 <script setup>
 import { ref } from "vue";
 import Note from "@/components/Notes/Note.vue";
+import { useStoreNotes } from "@/stores/storeNotes";
+import { storeToRefs } from "pinia";
 
 const newNote = ref( '' );
 
 const newNoteRef = ref( null );
 
-const notes = ref( [
-  {
-    id: 'id1',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque deserunt earum eum inventore officia quaerat soluta ullam vel. Dolore facere fugit itaque laboriosam maxime quis ratione soluta tenetur. Beatae'
-  },
-  {
-    id: 'id2',
-    content: 'shorter notes'
-  }
-] );
+const storeNotes = useStoreNotes();
 
-const addNote = () => {
-  const currentDate = new Date().getTime()
-  const id = currentDate.toString();
-  const note = {
-    id,
-    content: newNote.value
-  }
-  notes.value.unshift( note );
+const { notes } = storeToRefs( storeNotes );
+const { addNote } = storeNotes;
+
+const addNoteHandler = () => {
+  addNote( newNote.value );
   newNote.value = '';
   newNoteRef.value.focus();
-}
-
-const deleteNote = (id) => {
-  notes.value = notes.value.filter(note => note.id !== id);
 }
 </script>
 
@@ -52,7 +38,7 @@ const deleteNote = (id) => {
         <div class="control">
           <button
               :disabled="!newNote"
-              @click="addNote" class="button is-link has-background-success"
+              @click="addNoteHandler" class="button is-link has-background-success"
           >Add New Note
           </button>
         </div>
@@ -63,7 +49,6 @@ const deleteNote = (id) => {
         :note="note"
         :key="note.id"
         v-for="note in notes"
-        @deleteClicked="deleteNote"
     />
   </div>
 </template>
