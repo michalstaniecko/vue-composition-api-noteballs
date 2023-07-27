@@ -6,8 +6,7 @@ import { storeToRefs } from "pinia";
 import AddEditNote from "@/components/Notes/AddEditNote.vue";
 
 const newNote = ref( '' );
-
-const newNoteRef = ref( null );
+const addEditRef = ref( null );
 
 const storeNotes = useStoreNotes();
 
@@ -17,6 +16,7 @@ const { addNote } = storeNotes;
 const addNoteHandler = () => {
   addNote( newNote.value );
   newNote.value = '';
+  addEditRef.value.focusTextarea();
 }
 </script>
 
@@ -24,6 +24,7 @@ const addNoteHandler = () => {
   <div class="notes">
     <AddEditNote
         v-model="newNote"
+        ref="addEditRef"
     >
 
       <template #buttons>

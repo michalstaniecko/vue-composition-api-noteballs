@@ -1,5 +1,7 @@
 <script setup>
-import {computed} from "vue";
+import {computed, ref} from "vue";
+
+const textareaRef = ref(null);
 
 const props = defineProps( {
   modelValue: {
@@ -18,6 +20,14 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
+
+const focusTextarea = () => {
+  textareaRef.value.focus();
+}
+
+defineExpose({
+  focusTextarea
+})
 </script>
 
 <template>
@@ -27,7 +37,7 @@ const value = computed({
           <textarea
               v-model="value"
               @input="$emit('update:modelValue', value)"
-              ref="newNoteRef"
+              ref="textareaRef"
               class="textarea"
               placeholder="Add a new note"
           ></textarea>
