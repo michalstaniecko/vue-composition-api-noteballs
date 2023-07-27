@@ -17,16 +17,18 @@ const { addNote } = storeNotes;
 const addNoteHandler = () => {
   addNote( newNote.value );
   newNote.value = '';
-  newNoteRef.value.focus();
 }
 </script>
 
 <template>
   <div class="notes">
-    <AddEditNote>
+    <AddEditNote
+        v-model="newNote"
+    >
 
-      <template #buttons >
+      <template #buttons>
         <button
+            @click.prevent="addNoteHandler"
             class="button is-link has-background-success"
         >Add New Note
         </button>
