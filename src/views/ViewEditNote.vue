@@ -1,8 +1,16 @@
 <script setup>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import AddEditNote from "@/components/Notes/AddEditNote.vue";
+import { useStoreNotes } from "@/stores/storeNotes";
+
+const { params } = useRoute();
+
+const storeNotes = useStoreNotes();
 
 const noteContent = ref( '' );
+
+noteContent.value = storeNotes.getNoteContent(params.id)
 
 </script>
 
@@ -29,6 +37,9 @@ const noteContent = ref( '' );
         </button>
       </template>
     </AddEditNote>
+    <pre>
+      {{ $route.params.id }}
+    </pre>
   </div>
 </template>
 
