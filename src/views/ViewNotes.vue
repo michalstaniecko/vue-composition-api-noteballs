@@ -25,6 +25,7 @@ const addNoteHandler = () => {
     <AddEditNote
         v-model="newNote"
         ref="addEditRef"
+        placeholder="Add a new note"
     >
 
       <template #buttons>

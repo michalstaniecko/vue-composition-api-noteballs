@@ -1,37 +1,54 @@
 <script setup>
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 
-const textareaRef = ref(null);
+const textareaRef = ref( null );
 
 const props = defineProps( {
   modelValue: {
     type: String,
     required: true
+  },
+  bgColor: {
+    type: String,
+    default: 'success'
+  },
+  placeholder: {
+    type: String,
+    default: 'Type something...'
+  },
+  label: {
+    type: String
   }
 } )
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits( [ 'update:modelValue' ] )
 
-const value = computed({
+const value = computed( {
   get() {
     return props.modelValue
   },
-  set(value) {
-    emit('update:modelValue', value)
+  set( value ) {
+    emit( 'update:modelValue', value )
   }
-})
+} )
 
 const focusTextarea = () => {
   textareaRef.value.focus();
 }
 
-defineExpose({
+defineExpose( {
   focusTextarea
-})
+} )
 </script>
 
 <template>
-  <div class="card has-background-success-dark p-4 mb-5">
+  <div
+      :class="`has-background-${bgColor}-dark`"
+      class="card p-4 mb-5"
+  >
+    <label v-if="label" class="label has-text-white">
+      {{ label }}
+    </label>
     <div class="field">
       <div class="control">
           <textarea
@@ -39,7 +56,7 @@ defineExpose({
               @input="$emit('update:modelValue', value)"
               ref="textareaRef"
               class="textarea"
-              placeholder="Add a new note"
+              :placeholder="placeholder"
           ></textarea>
       </div>
     </div>
