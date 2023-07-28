@@ -11,8 +11,15 @@ const handleNavItemClicked = ( e ) => {
   showMobileNav.value = false;
 }
 
+const hamburgerRef = ref(null);
 const navRef = ref(null);
-onClickOutside(navRef, () => showMobileNav.value = false)
+onClickOutside(
+    navRef,
+    () => showMobileNav.value = false,
+    {
+      ignore: [hamburgerRef]
+    }
+);
 
 </script>
 
@@ -28,6 +35,7 @@ onClickOutside(navRef, () => showMobileNav.value = false)
             role="button" @click.prevent="showMobileNav = !showMobileNav" class="navbar-burger"
             :class="{'is-active': showMobileNav}" aria-label="menu" aria-expanded="false"
             data-target="navbarBasicExample"
+            ref="hamburgerRef"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
