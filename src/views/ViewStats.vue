@@ -8,7 +8,7 @@ const storeNotes = useStoreNotes();
 
 const inquiry = ref('');
 
-useWatchCharacters(inquiry)
+useWatchCharacters(inquiry, 40)
 
 </script>
 
