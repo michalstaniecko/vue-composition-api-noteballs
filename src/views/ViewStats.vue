@@ -1,9 +1,14 @@
 <script setup>
+import {ref} from "vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { vAutofocus } from "@/directives/vAutofocus";
+import {useWatchCharacters} from "@/use/useWatchCharacters";
 
 const storeNotes = useStoreNotes();
 
+const inquiry = ref('');
+
+useWatchCharacters(inquiry)
 
 </script>
 
@@ -28,6 +33,7 @@ const storeNotes = useStoreNotes();
       </tbody>
     </table>
     <input
+        v-model="inquiry"
         v-autofocus
         class="input"
         type="text"
