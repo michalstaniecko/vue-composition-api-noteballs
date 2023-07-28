@@ -31,7 +31,7 @@ export const useStoreNotes = defineStore( 'storeNotes', {
         },
 
         updateNote( { id, content } ) {
-            const index = this.notes.findIndex(note => note.id === id);
+            const index = this.notes.findIndex( note => note.id === id );
             this.notes[index].content = content;
         }
     },
@@ -41,6 +41,16 @@ export const useStoreNotes = defineStore( 'storeNotes', {
             return ( id ) => {
                 return notes.find( note => note.id === id ).content
             }
+        },
+
+        totalNotesCount: ( { notes } ) => {
+            return notes.length;
+        },
+
+        totalCharactersCount: ({notes}) => {
+            return notes.reduce((total, note) => {
+                return total + note.content.length;
+            }, 0)
         }
     }
 } )
