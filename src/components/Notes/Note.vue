@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from "vue";
+import { computed, onMounted, reactive } from "vue";
 import ModalDeleteNote from "@/components/Notes/ModalDeleteNote.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 

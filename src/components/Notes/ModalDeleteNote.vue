@@ -1,28 +1,40 @@
 <script setup>
-import {ref} from "vue";
-import {onClickOutside} from "@vueuse/core";
+import { onMounted, onUnmounted, ref } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
-const modalRef = ref(null);
+const modalRef = ref( null );
 
-const props = defineProps({
+const props = defineProps( {
   modelValue: {
     type: Boolean,
     default: false
   }
-});
+} );
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits( [ 'update:modelValue' ] )
 
 const closeModal = () => {
-  emit('update:modelValue', false)
+  emit( 'update:modelValue', false )
 }
 
-onClickOutside(modalRef, closeModal);
+onClickOutside( modalRef, closeModal );
+
+const handleKeyboard = ( e ) => {
+  if (e.key === 'Escape') closeModal();
+};
+
+onMounted( () => {
+  document.addEventListener( 'keyup', handleKeyboard )
+} )
+
+onUnmounted( () => {
+  document.removeEventListener( 'keyup', handleKeyboard )
+} )
 
 </script>
 
 <template>
-  <div class="modal is-active p-2" >
+  <div class="modal is-active p-2">
     <div class="modal-background"></div>
     <div class="modal-card" ref="modalRef">
       <header class="modal-card-head">
