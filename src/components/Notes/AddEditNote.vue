@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
+import { vAutofocus } from "@/directives/vAutofocus";
 
 const textareaRef = ref( null );
 
@@ -40,11 +41,6 @@ defineExpose( {
   focusTextarea
 } );
 
-const vAutofocus = {
-  mounted: (el) => {
-    el.focus();
-  }
-}
 </script>
 
 <template>
