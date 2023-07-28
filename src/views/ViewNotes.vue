@@ -30,6 +30,7 @@ const addNoteHandler = () => {
 
       <template #buttons>
         <button
+            :disabled="!newNote"
             @click.prevent="addNoteHandler"
             class="button is-link has-background-success"
         >Add New Note

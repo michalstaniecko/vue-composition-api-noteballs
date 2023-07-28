@@ -53,7 +53,6 @@ defineExpose( {
       <div class="control">
           <textarea
               v-model="value"
-              @input="$emit('update:modelValue', value)"
               ref="textareaRef"
               class="textarea"
               :placeholder="placeholder"
