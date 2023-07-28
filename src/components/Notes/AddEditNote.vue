@@ -38,7 +38,13 @@ const focusTextarea = () => {
 
 defineExpose( {
   focusTextarea
-} )
+} );
+
+const vAutofocus = {
+  mounted: (el) => {
+    el.focus();
+  }
+}
 </script>
 
 <template>
@@ -52,6 +58,7 @@ defineExpose( {
     <div class="field">
       <div class="control">
           <textarea
+              v-autofocus
               v-model="value"
               ref="textareaRef"
               class="textarea"
