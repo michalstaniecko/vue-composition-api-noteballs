@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { onClickOutside } from "@vueuse/core";
 
 const showMobileNav = ref( false );
 
@@ -9,6 +10,10 @@ const handleNavItemClicked = ( e ) => {
 
   showMobileNav.value = false;
 }
+
+const navRef = ref(null);
+onClickOutside(navRef, () => showMobileNav.value = false)
+
 </script>
 
 <template>
@@ -30,7 +35,7 @@ const handleNavItemClicked = ( e ) => {
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': showMobileNav}">
+      <div id="navbarBasicExample" ref="navRef" class="navbar-menu" :class="{'is-active': showMobileNav}">
         <div class="navbar-end" @click.prevent="handleNavItemClicked">
           <RouterLink
               class="navbar-item"
