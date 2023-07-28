@@ -59,6 +59,7 @@ defineExpose( {
               ref="textareaRef"
               class="textarea"
               :placeholder="placeholder"
+              maxlength="100"
           ></textarea>
       </div>
     </div>
