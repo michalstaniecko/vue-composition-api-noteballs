@@ -2,6 +2,13 @@
 import { ref } from 'vue';
 
 const showMobileNav = ref( false );
+
+const handleNavItemClicked = ( e ) => {
+  const navItem = e.target.closest( '.navbar-item' );
+  if (!navItem) return;
+
+  showMobileNav.value = false;
+}
 </script>
 
 <template>
@@ -12,7 +19,11 @@ const showMobileNav = ref( false );
           Noteballs
         </div>
 
-        <a role="button" @click.prevent="showMobileNav = !showMobileNav" class="navbar-burger" :class="{'is-active': showMobileNav}" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a
+            role="button" @click.prevent="showMobileNav = !showMobileNav" class="navbar-burger"
+            :class="{'is-active': showMobileNav}" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample"
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -20,7 +31,7 @@ const showMobileNav = ref( false );
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': showMobileNav}">
-        <div class="navbar-end">
+        <div class="navbar-end" @click.prevent="handleNavItemClicked">
           <RouterLink
               class="navbar-item"
               to="/"
@@ -40,11 +51,11 @@ const showMobileNav = ref( false );
 </template>
 
 <style scoped>
-  @media (max-width: 1023px) {
-    .navbar-menu {
-      position: absolute;
-      left: 0;
-      width: 100%;
-    }
+@media (max-width: 1023px) {
+  .navbar-menu {
+    position: absolute;
+    left: 0;
+    width: 100%;
   }
+}
 </style>
