@@ -44,6 +44,11 @@ onClickOutside(
       </div>
 
       <div id="navbarBasicExample" ref="navRef" class="navbar-menu" :class="{'is-active': showMobileNav}">
+        <div class="navbar-start">
+          <button class="button is-small is-info mt-3 ml-3">
+            Log out
+          </button>
+        </div>
         <div class="navbar-end" @click.prevent="handleNavItemClicked">
           <RouterLink
               class="navbar-item"
