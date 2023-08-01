@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive } from "vue";
 import ModalDeleteNote from "@/components/Notes/ModalDeleteNote.vue";
+import {useDateFormat} from "@vueuse/core";
 
 const props = defineProps( {
   note: {
@@ -17,7 +18,13 @@ const characterLength = computed( () => {
 
 const modals = reactive( {
   deleteNote: false
-} )
+} );
+
+const dateFormatted = computed(() => {
+  const date = new Date(parseInt(props.note.date));
+  const formatted = useDateFormat(date, 'YYYY-MM-DD @ HH:mm');
+  return formatted.value;
+})
 
 </script>
 
@@ -26,8 +33,11 @@ const modals = reactive( {
     <div class="card-content">
       <div class="content">
         {{ note.content }}
-        <div class="has-text-right has-text-grey-light mt-2">
-          <small>
+        <div class="columns is-mobile has-text-grey-light mt-2">
+          <small class="column">
+            {{ dateFormatted }}
+          </small>
+          <small class="column has-text-right">
             {{ characterLength }}
           </small>
         </div>

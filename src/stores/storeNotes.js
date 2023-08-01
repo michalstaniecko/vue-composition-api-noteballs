@@ -40,7 +40,8 @@ export const useStoreNotes = defineStore( 'storeNotes', {
                 querySnapshot.forEach( ( doc ) => {
                     const note = {
                         id: doc.id,
-                        content: doc.data().content
+                        content: doc.data().content,
+                        date: doc.data().date
                     }
                     notes.push( note );
                 } );
