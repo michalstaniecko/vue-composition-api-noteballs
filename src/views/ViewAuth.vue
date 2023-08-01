@@ -42,8 +42,12 @@ const credentials = reactive( {
   password: ''
 } )
 
-const loginHandler = () => {
-  storeAuth.loginUser( credentials )
+const resetForm = () => {
+  credentials.email = '';
+  credentials.password = '';
+}
+const loginHandler = async () => {
+  storeAuth.loginUser( credentials );
 }
 
 const registerHandler = () => {

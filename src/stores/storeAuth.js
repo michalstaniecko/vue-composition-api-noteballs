@@ -10,20 +10,20 @@ import { auth } from "@/js/firebase";
 export const useStoreAuth = defineStore( 'storeAuth', {
     state: () => {
         return {
-            user: {  }
+            user: {}
         }
     },
     actions: {
         init() {
-            onAuthStateChanged(auth, (user) => {
+            onAuthStateChanged( auth, ( user ) => {
                 if (user) {
-                    console.log('user logged in: ', user);
+                    console.log( 'user logged in: ', user );
                     this.user.id = user.uid;
                     this.user.email = user.email;
                 } else {
                     this.user = {};
                 }
-            });
+            } );
         },
         registerUser( { email, password } ) {
             createUserWithEmailAndPassword( auth, email, password )
@@ -39,16 +39,22 @@ export const useStoreAuth = defineStore( 'storeAuth', {
             signInWithEmailAndPassword( auth, email, password )
                 .then( userCredential => {
                     const user = userCredential.user;
+                    return true;
                 } )
                 .catch( error => {
+                    return false;
                 } )
         },
         logoutUser() {
             signOut( auth ).then( () => {
-                console.log('user logged out')
+                console.log( 'user logged out' )
             } ).catch( ( error ) => {
             } );
         }
     },
-    getters: {}
+    getters: {
+        isLogged() {
+            return !!this.user.id;
+        }
+    }
 } )

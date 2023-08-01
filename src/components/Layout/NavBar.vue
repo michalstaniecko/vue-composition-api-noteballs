@@ -24,7 +24,10 @@ onClickOutside(
     }
 );
 
-const logoutUserHandler = () => storeAuth.logoutUser();
+const logoutUserHandler = () => {
+  storeAuth.logoutUser();
+  showMobileNav.value = false;
+}
 
 </script>
 
@@ -51,10 +54,19 @@ const logoutUserHandler = () => storeAuth.logoutUser();
       <div id="navbarBasicExample" ref="navRef" class="navbar-menu" :class="{'is-active': showMobileNav}">
         <div class="navbar-start">
           <button
+              v-if="storeAuth.isLogged"
               @click.prevent="logoutUserHandler"
-              class="button is-small is-info mt-3 ml-3">
-            Log out
+              class="button is-small is-info mt-3 ml-3"
+          >
+            Log out {{ storeAuth.user.email }}
           </button>
+          <RouterLink
+              v-else
+              class="button is-small is-info mt-3 ml-3"
+              to="/auth"
+          >
+            Login/Register
+          </RouterLink>
         </div>
         <div class="navbar-end" @click.prevent="handleNavItemClicked">
           <RouterLink
