@@ -43,7 +43,7 @@ const credentials = reactive( {
 } )
 
 const loginHandler = () => {
-  console.log( 'login handler' );
+  storeAuth.loginUser( credentials )
 }
 
 const registerHandler = () => {

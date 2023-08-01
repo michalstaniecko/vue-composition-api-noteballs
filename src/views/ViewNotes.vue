@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Note from "@/components/Notes/Note.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { storeToRefs } from "pinia";
@@ -21,6 +21,10 @@ const addNoteHandler = () => {
 }
 
 useWatchCharacters( newNote );
+
+onMounted(() => {
+  storeNotes.getNotes();
+});
 
 </script>
 

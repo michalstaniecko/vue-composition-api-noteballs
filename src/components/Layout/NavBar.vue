@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import { onClickOutside } from "@vueuse/core";
+import { useStoreAuth } from "@/stores/storeAuth";
+
+const storeAuth = useStoreAuth();
 
 const showMobileNav = ref( false );
 
@@ -11,15 +14,17 @@ const handleNavItemClicked = ( e ) => {
   showMobileNav.value = false;
 }
 
-const hamburgerRef = ref(null);
-const navRef = ref(null);
+const hamburgerRef = ref( null );
+const navRef = ref( null );
 onClickOutside(
     navRef,
     () => showMobileNav.value = false,
     {
-      ignore: [hamburgerRef]
+      ignore: [ hamburgerRef ]
     }
 );
+
+const logoutUserHandler = () => storeAuth.logoutUser();
 
 </script>
 
@@ -45,7 +50,9 @@ onClickOutside(
 
       <div id="navbarBasicExample" ref="navRef" class="navbar-menu" :class="{'is-active': showMobileNav}">
         <div class="navbar-start">
-          <button class="button is-small is-info mt-3 ml-3">
+          <button
+              @click.prevent="logoutUserHandler"
+              class="button is-small is-info mt-3 ml-3">
             Log out
           </button>
         </div>
