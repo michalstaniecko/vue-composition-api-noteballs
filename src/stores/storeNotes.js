@@ -21,14 +21,6 @@ export const useStoreNotes = defineStore( 'storeNotes', {
     state: () => (
         {
             notes: [
-                // {
-                //     id: 'id1',
-                //     content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque deserunt earum eum inventore officia quaerat soluta ullam vel. Dolore facere fugit itaque laboriosam maxime quis ratione soluta tenetur. Beatae'
-                // },
-                // {
-                //     id: 'id2',
-                //     content: 'shorter notes'
-                // }
             ],
             notesLoaded: false
         }

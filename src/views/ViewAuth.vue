@@ -1,5 +1,8 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import { useStoreAuth } from "@/stores/storeAuth";
+
+const storeAuth = useStoreAuth();
 
 const activeTab = ref( 'login' )
 
@@ -10,7 +13,7 @@ const title = ref( {
 
 const isActiveTab = ( tab ) => tab === activeTab.value
 
-const switchTab = (tab) => {
+const switchTab = ( tab ) => {
   activeTab.value = tab
   credentials.email = '';
   credentials.password = '';
@@ -28,7 +31,7 @@ const validateForm = () => {
   }
 
   if (!valid) {
-    alert('Provide email and password!')
+    alert( 'Provide email and password!' )
   }
 
   return valid;
@@ -40,11 +43,11 @@ const credentials = reactive( {
 } )
 
 const loginHandler = () => {
-  console.log('login handler');
+  console.log( 'login handler' );
 }
 
 const registerHandler = () => {
-  console.log('register handler');
+  storeAuth.registerUser( credentials )
 }
 
 const onSubmit = () => {
