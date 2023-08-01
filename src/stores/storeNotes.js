@@ -48,9 +48,7 @@ export const useStoreNotes = defineStore( 'storeNotes', {
         },
 
         async updateNote( { id, content } ) {
-            const note = doc(notesCollectionRef, id);
-
-            await updateDoc(note, {
+            await updateDoc(doc(notesCollectionRef, id), {
                 content: content
             });
         }
