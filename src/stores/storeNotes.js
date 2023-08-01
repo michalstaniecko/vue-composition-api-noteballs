@@ -29,13 +29,14 @@ export const useStoreNotes = defineStore( 'storeNotes', {
                 //     id: 'id2',
                 //     content: 'shorter notes'
                 // }
-            ]
+            ],
+            notesLoaded: false
         }
     ),
     actions: {
-        async getNotes() {
-            const q = notesCollectionQuery;
-            onSnapshot( q, ( querySnapshot ) => {
+        getNotes() {
+            this.notesLoaded = false;
+            onSnapshot( notesCollectionQuery, ( querySnapshot ) => {
                 let notes = [];
                 querySnapshot.forEach( ( doc ) => {
                     const note = {
@@ -46,6 +47,7 @@ export const useStoreNotes = defineStore( 'storeNotes', {
                     notes.push( note );
                 } );
                 this.notes = notes;
+                this.notesLoaded = true;
             } );
         },
         async addNote( newNoteContent ) {

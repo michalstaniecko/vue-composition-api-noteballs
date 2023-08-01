@@ -11,7 +11,7 @@ const addEditRef = ref( null );
 
 const storeNotes = useStoreNotes();
 
-const { notes } = storeToRefs( storeNotes );
+const { notes, notesLoaded } = storeToRefs( storeNotes );
 const { addNote } = storeNotes;
 
 const addNoteHandler = () => {
@@ -20,7 +20,7 @@ const addNoteHandler = () => {
   newNote.value = '';
 }
 
-useWatchCharacters(newNote);
+useWatchCharacters( newNote );
 
 </script>
 
@@ -42,11 +42,17 @@ useWatchCharacters(newNote);
       </template>
     </AddEditNote>
 
-    <Note
-        :note="note"
-        :key="note.id"
-        v-for="note in notes"
-    />
+    <progress v-if="!notesLoaded" class="progress is-large is-info" max="100"/>
+
+    <template
+        v-else
+    >
+      <Note
+          :note="note"
+          :key="note.id"
+          v-for="note in notes"
+      />
+    </template>
   </div>
 </template>
 
