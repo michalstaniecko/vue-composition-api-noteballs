@@ -60,13 +60,6 @@ const logoutUserHandler = () => {
           >
             Log out {{ storeAuth.user.email }}
           </button>
-          <RouterLink
-              v-else
-              class="button is-small is-info mt-3 ml-3"
-              to="/auth"
-          >
-            Login/Register
-          </RouterLink>
         </div>
         <div class="navbar-end" @click.prevent="handleNavItemClicked">
           <RouterLink
