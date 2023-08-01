@@ -24,7 +24,10 @@ const props = defineProps( {
 
 const emit = defineEmits( [ 'update:modelValue' ] )
 
-const value = ref(props.modelValue)
+const value = computed( {
+  get: () => props.modelValue,
+  set: ( value ) => emit( 'update:modelValue', value )
+} )
 
 const focusTextarea = () => {
   textareaRef.value.focus();
@@ -49,7 +52,6 @@ defineExpose( {
           <textarea
               v-autofocus
               v-model="value"
-              @input="emit('update:modelValue', value)"
               ref="textareaRef"
               class="textarea"
               :placeholder="placeholder"

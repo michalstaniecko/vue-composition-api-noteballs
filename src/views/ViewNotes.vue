@@ -16,8 +16,8 @@ const { addNote } = storeNotes;
 
 const addNoteHandler = () => {
   addNote( newNote.value );
-  newNote.value = '';
   addEditRef.value.focusTextarea();
+  newNote.value = '';
 }
 
 useWatchCharacters(newNote);
