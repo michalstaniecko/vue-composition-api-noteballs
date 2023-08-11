@@ -11,7 +11,12 @@ import {
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
-const notesCollectionRef = collection( db, "notes" );
+const notesCollectionRef = collection(
+    db,
+    "users",
+    "na8gwFLjhROynC9hGW6ClRg6B163",
+    "notes"
+);
 const notesCollectionQuery = query(
     notesCollectionRef,
     orderBy( 'date', 'desc' )
@@ -20,8 +25,7 @@ const notesCollectionQuery = query(
 export const useStoreNotes = defineStore( 'storeNotes', {
     state: () => (
         {
-            notes: [
-            ],
+            notes: [],
             notesLoaded: false
         }
     ),

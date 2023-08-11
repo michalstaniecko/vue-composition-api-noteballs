@@ -17,7 +17,6 @@ export const useStoreAuth = defineStore( 'storeAuth', {
         init() {
             onAuthStateChanged( auth, ( user ) => {
                 if (user) {
-                    console.log( 'user logged in: ', user );
                     this.user.id = user.uid;
                     this.user.email = user.email;
                     this.router.push('/')
@@ -49,7 +48,6 @@ export const useStoreAuth = defineStore( 'storeAuth', {
         },
         logoutUser() {
             signOut( auth ).then( () => {
-                console.log( 'user logged out' )
             } ).catch( ( error ) => {
             } );
         }
