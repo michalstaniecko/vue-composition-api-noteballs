@@ -10,10 +10,12 @@ import {
     orderBy
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
-import {useStoreAuth} from "@/stores/storeAuth";
+import { useStoreAuth } from "@/stores/storeAuth";
 
 let notesCollectionRef,
     notesCollectionQuery;
+
+let unsubscribeSnapshot = null;
 
 export const useStoreNotes = defineStore( 'storeNotes', {
     state: () => (
@@ -41,7 +43,8 @@ export const useStoreNotes = defineStore( 'storeNotes', {
 
         getNotes() {
             this.notesLoaded = false;
-            onSnapshot( notesCollectionQuery, ( querySnapshot ) => {
+
+            unsubscribeSnapshot = onSnapshot( notesCollectionQuery, ( querySnapshot ) => {
                 let notes = [];
                 querySnapshot.forEach( ( doc ) => {
                     const note = {
@@ -55,6 +58,12 @@ export const useStoreNotes = defineStore( 'storeNotes', {
                 this.notesLoaded = true;
             } );
         },
+
+        clearNotes() {
+            this.notes = [];
+            if (unsubscribeSnapshot) unsubscribeSnapshot();
+        },
+
         async addNote( newNoteContent ) {
             const currentDate = new Date().getTime()
             const date = currentDate.toString();
