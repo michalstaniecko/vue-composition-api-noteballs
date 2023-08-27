@@ -7,7 +7,8 @@ import {
     deleteDoc,
     updateDoc,
     query,
-    orderBy
+    orderBy,
+    where
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
 import { useStoreAuth } from "@/stores/storeAuth";
@@ -29,12 +30,11 @@ export const useStoreNotes = defineStore( 'storeNotes', {
             const storeAuth = useStoreAuth();
             notesCollectionRef = collection(
                 db,
-                "users",
-                storeAuth.user.id,
                 "notes"
             );
             notesCollectionQuery = query(
                 notesCollectionRef,
+                where('uid', '==', storeAuth.user.id),
                 orderBy( 'date', 'desc' )
             )
 
@@ -67,12 +67,14 @@ export const useStoreNotes = defineStore( 'storeNotes', {
         },
 
         async addNote( newNoteContent ) {
+            const storeAuth = useStoreAuth();
             const currentDate = new Date().getTime()
             const date = currentDate.toString();
 
             await addDoc( notesCollectionRef, {
                 content: newNoteContent,
-                date
+                date,
+                uid: storeAuth.user.id
             } );
         },
 
